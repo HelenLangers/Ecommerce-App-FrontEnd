@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+import products from '../../src/products.json'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +15,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
+      {products.data.map(product => (
+        <div key={product.attributes.name} className={styles.product}>
+          <div className={styles.product__Row}>
+            <div className={styles.product__ColImg}>
+              <img src=""/>
+            </div>
+            <div className={styles.product__Col}>
+              {product.attributes.name} {product.attributes.price}
+            </div>
+          </div>
+        </div>
+      ))}
     </>
   )
 }
