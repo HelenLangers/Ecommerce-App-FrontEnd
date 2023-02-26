@@ -1,11 +1,14 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import products from '../../src/products.json'
+import { fromImageToUrl } from 'utils/urls'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  console.log(products)
   return (
     <>
       <Head>
@@ -17,14 +20,16 @@ export default function Home() {
       
       {products.data.map(product => (
         <div key={product.attributes.name} className={styles.product}>
-          <div className={styles.product__Row}>
-            <div className={styles.product__ColImg}>
-              <img src=""/>
+          <Link href={`/products/${product.attributes.slug}`}>
+            <div className={styles.product__Row}>
+              <div className={styles.product__ColImg}>
+                <img src={fromImageToUrl(product.attributes.image)}/>
+              </div>
+              <div className={styles.product__Col}>
+                {product.attributes.name} {product.attributes.price}
+              </div>
             </div>
-            <div className={styles.product__Col}>
-              {product.attributes.name} {product.attributes.price}
-            </div>
-          </div>
+          </Link>
         </div>
       ))}
     </>
