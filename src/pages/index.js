@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+
 import products from '../../src/products.json'
 import { fromImageToUrl } from 'utils/urls'
 import { twoDecimals } from 'utils/format'
 
 
 export default function Home() {
-  console.log(products)
+  // console.log(products)
   return (
     <>
       <Head>
