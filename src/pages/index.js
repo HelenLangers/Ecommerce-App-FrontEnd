@@ -4,8 +4,8 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import products from '../../src/products.json'
 import { fromImageToUrl } from 'utils/urls'
+import { twoDecimals } from 'utils/format'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   console.log(products)
@@ -26,7 +26,7 @@ export default function Home() {
                 <img src={fromImageToUrl(product.attributes.image)}/>
               </div>
               <div className={styles.product__Col}>
-                {product.attributes.name} {product.attributes.price}
+                {product.attributes.name} £{twoDecimals(product.attributes.price)}
               </div>
             </div>
           </Link>
