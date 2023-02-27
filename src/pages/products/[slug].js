@@ -1,11 +1,10 @@
 import Head from 'next/head'
 import { fromImageToUrl } from 'utils/urls'
 import { twoDecimals } from 'utils/format'
-import products from '../../products.json'
-const product = products.data[0]
+// import products from '../../products.json'
+// const product = products.data[0]
 
-const Product = () => {
-    // console.log(products)
+const Product = ({product}) => {
 
     return (
         <div>
@@ -27,6 +26,31 @@ const Product = () => {
             </p>
         </div>
     )
+}
+
+export async function getStaticProps({params: {slug}}){
+    const product_res = await fetch(`http://localhost:1337/api/products/?slug=${slug}`)
+    const found = await product_res.json()
+
+    return {
+        props: {
+            product: found[0]
+        }
+    }
+}
+
+export async function getStaticPaths(){
+    // retrieve all the possible paths
+    const products_res = await fetch("http://localhost:1337/api/products")
+    const products = await products_res.json()
+
+    // return them to nextjs context
+    return {
+        paths: products.map(product => ({
+            params: {slug: String(product.attributes.slug)}
+        })),
+        fallback: false // tells nextjs to show a 404 if param is not matched
+    }
 }
 
 export default Product
