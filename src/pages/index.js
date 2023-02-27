@@ -2,13 +2,13 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 
-// import products from '../../src/products.json'
-import { fromImageToUrl, API_URL } from 'utils/urls'
+import products from '../../src/products.json'
+import { fromImageToUrl } from 'utils/urls'
 import { twoDecimals } from 'utils/format'
 
 
-export default function Home({products}) {
-  console.log(products)
+export default function Home() {
+  // console.log(products)
   return (
     <>
       <Head>
@@ -36,25 +36,22 @@ export default function Home({products}) {
   )
 }
 
-export async function getStaticProps() {
-  try {
-    // fetch the products
-    const product_res = await fetch(`${API_URL}/api/products?populate=*`)
-    const products = await product_res.json()
+// export async function getStaticProps() {
+//   try {
+//     // fetch the products
+//     const product_res = await fetch("http://localhost:1337/api/products?populate=*")
+//     const products = await product_res.json()
 
-    if (errors || !products) {
-      return { notFound: true };
-    }
-      // return the products as props
-    return {
-      props: {
-        products
-      }
-    }
-  } catch (error) {
-    return {notFound: true}
-  }
-  
-
-
-}
+//     if (errors || !products) {
+//       return { notFound: true };
+//     } 
+//       // return the products as props
+//     return {
+//       props: {
+//         products
+//       }
+//     }
+//   } catch (error) {
+//     return {notFound: true}
+//   }
+// }
